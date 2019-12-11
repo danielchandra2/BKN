@@ -19,3 +19,21 @@ Route::get('/admin', 'AdminController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth' => 'admin']], function(){
+	Route::get('/', function(){
+		return "halaman dashboard admin";
+	});
+});
+
+Route::group(['prefix' => 'operator', 'middleware' => ['auth' => 'operator']], function(){
+	Route::get('/', function(){
+		return "halaman dashboard operator";
+	});
+});
+
+Route::group(['prefix' => 'verifikator', 'middleware' => ['auth' => 'verifikator']], function(){
+	Route::get('/', function(){
+		return "halaman dashboard verifikator";
+	});
+});
